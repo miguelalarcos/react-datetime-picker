@@ -138,8 +138,19 @@ changedatemx =
                   date.hour(self.state.date.hour())
                   date.minute(self.state.date.minute())
               #
+              path = name.split('.')
+              last = path[-1..][0]
+
               dct = {}
-              dct[name] = date
-              self.setState dct
+              dct_ = dct
+              for p in path
+                if p == last
+                    dct[p] = {$set: date}
+                else
+                    dct[p] = {}
+                dct = dct[p]
+
+
+              self.setState(React.addons.update(self.state, dct_))
 
 
