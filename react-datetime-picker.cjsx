@@ -131,14 +131,14 @@ DTP.DateTimePicker = ReactMeteor.createClass
         <input type='text' onClick={this.showCalendar} value={this.props.value.format(this.props.format)} />
 
 DTP.changeDataMx =
-    changeDate: (name) ->
-        self = this
+    changeDate: (name, self) ->
+        self = self or this
         (date) ->
               hour = date.hour()
               minute = date.minute()
               if not hour and not minute
-                  date.hour(self.state.date.hour())
-                  date.minute(self.state.date.minute())
+                  date.hour(self.state[name].hour())
+                  date.minute(self.state[name].minute())
               #
               path = name.split('.')
               last = path[-1..][0]
