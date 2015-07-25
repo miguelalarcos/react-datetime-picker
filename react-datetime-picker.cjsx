@@ -1,3 +1,5 @@
+DTP = {}
+
 dayRow = (week, date)->
   ret = []
   day = date.clone()
@@ -47,7 +49,7 @@ Week = ReactMeteor.createClass
         </div>
 
 
-DateTimePicker = ReactMeteor.createClass
+DTP.DateTimePicker = ReactMeteor.createClass
     showCalendar: -> this.setState show: not this.state.show
     getInitialState: ->
         show: false
@@ -128,7 +130,7 @@ DateTimePicker = ReactMeteor.createClass
       else
         <input type='text' onClick={this.showCalendar} value={this.props.value.format(this.props.format)} />
 
-changedatemx =
+DTP.changeDataMx =
     changeDate: (name) ->
         self = this
         (date) ->

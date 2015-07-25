@@ -7,7 +7,7 @@ Example of use:
 
 ```cjsx
 A = ReactMeteor.createClass
-    mixins: [changedatemx]
+    mixins: [DTP.changeDataMx]
     getInitialState: ->
         date: moment()
         date2: 
@@ -15,8 +15,8 @@ A = ReactMeteor.createClass
     templateName: 'A'
     render: ->
         <div>
-            <DateTimePicker changeData=this.changeDate('date') value=this.state.date time=true format='DD-MM-YYYY HH:mm'/>
-            <DateTimePicker changeData=this.changeDate('date2.date') value=this.state.date2.date time=false format='DD-MM-YYYY'/>
+            <DTP.DateTimePicker changeData=this.changeDate('date') value=this.state.date time=true format='DD-MM-YYYY HH:mm'/>
+            <DTP.DateTimePicker changeData=this.changeDate('date2.date') value=this.state.date2.date time=false format='DD-MM-YYYY'/>
         </div>
 ```
 
