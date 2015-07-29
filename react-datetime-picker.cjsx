@@ -58,71 +58,71 @@ DTP.DateTimePicker = React.createClass
     getInitialState: ->
         show: false
     minusMonth: (e)->
-         d = this.props.value.clone()
+         d = moment(this.props.value) #.clone()
          d.subtract(1, 'months')
          this.props.changeData(d)
          e.preventDefault()
     plusMonth: (e)->
-         d = this.props.value.clone()
+         d = moment(this.props.value) # this.props.value.clone()
          d.add(1, 'months')
          this.props.changeData(d)
          e.preventDefault()
     minusYear: (e)->
-         d = this.props.value.clone()
+         d = moment(this.props.value) #this.props.value.clone()
          d.subtract(1, 'years')
          this.props.changeData(d)
          e.preventDefault()
     plusYear: (e)->
-         d = this.props.value.clone()
+         d = moment(this.props.value) # this.props.value.clone()
          d.add(1, 'years')
          this.props.changeData(d)
          e.preventDefault()
     plusMinute: (e) ->
-         d = this.props.value.clone()
+         d = moment(this.props.value) #this.props.value.clone()
          d.add(1, 'minutes')
          this.props.changeData(d)
          e.preventDefault()
     minusMinute: (e) ->
-         d = this.props.value.clone()
+         d = moment(this.props.value) # this.props.value.clone()
          d.subtract(1, 'minutes')
          this.props.changeData(d)
          e.preventDefault()
     plusHour: (e) ->
-         d = this.props.value.clone()
+         d = moment(this.props.value) # this.props.value.clone()
          d.add(1, 'hours')
          this.props.changeData(d)
          e.preventDefault()
     minusHour: (e) ->
-         d = this.props.value.clone()
+         d = moment(this.props.value) # this.props.value.clone()
          d.subtract(1, 'hours')
          this.props.changeData(d)
          e.preventDefault()
     render: ->
       if this.state.show
         <div className='xdatetime'>
-            <input type='text' onClick={this.showCalendar} value={this.props.value.format(this.props.format)}/>
+            <input type='text' onClick={this.showCalendar} value={moment(this.props.value).format(this.props.format)}/>
             <div className="xdatetime-popover">
                 <div className="xdatetime-header">
                 <i onClick=this.minusMonth className="ion-minus minus-month"></i>
                 <span>&nbsp;&nbsp;</span>
-                {this.props.value.format('MM')}
+                {moment(this.props.value).format('MM')}
                 <span>&nbsp;&nbsp;</span>
                 <i  onClick=this.plusMonth className="ion-plus plus-month"></i>
                 <span>&nbsp;&nbsp;</span>
                 <i  onClick=this.minusYear className="ion-minus minus-year"></i>
                 <span>&nbsp;&nbsp;</span>
-                {this.props.value.format('YYYY')}
+                {moment(this.props.value).format('YYYY')}
                 <span>&nbsp;&nbsp;</span>
                 <i  onClick=this.plusYear className="ion-plus plus-year"></i>
                 </div>
-                {<Week show=@showCalendar m=this.props.value key=w week=w changeData=this.props.changeData></Week> for w in week()}
+                {<Week show=@showCalendar m=moment(this.props.value) key=w week=w changeData=this.props.changeData></Week> for w in week()}
                 {if this.props.time
                     <div className="xdatetime-bottom">
                         <i onClick=this.minusHour className="ion-minus minus-hour"></i>
                         <span>&nbsp;&nbsp;</span>
                         <i onClick=this.plusHour className="ion-plus plus-hour"></i>
                         <span>&nbsp;&nbsp;</span>
-                        <span >{this.props.value.format('HH:mm')}</span>
+                        <span >{moment(this.props.value).format('HH:mm')}</span>
                         <span>&nbsp;&nbsp;</span>
                         <i onClick=this.minusMinute className="ion-minus minus-minute"></i>
                         <span>&nbsp;&nbsp;</span>
@@ -132,7 +132,7 @@ DTP.DateTimePicker = React.createClass
             </div>
         </div>
       else
-        <input type='text' onClick={this.showCalendar} value={this.props.value.format(this.props.format)} />
+        <input type='text' onClick={this.showCalendar} value={moment(this.props.value).format(this.props.format)} />
 
 DTP.changeDataMx =
     changeDate: (name) ->
@@ -141,8 +141,8 @@ DTP.changeDataMx =
               hour = date.hour()
               minute = date.minute()
               if not hour and not minute
-                  date.hour(self.state[name].hour())
-                  date.minute(self.state[name].minute())
+                  date.hour(moment(self.state[name]).hour())
+                  date.minute(moment(self.state[name]).minute())
               #
               path = name.split('.')
               last = path[-1..][0]
@@ -151,7 +151,7 @@ DTP.changeDataMx =
               dct_ = dct
               for p in path
                 if p == last
-                    dct[p] = {$set: date}
+                    dct[p] = {$set: date.toDate()}
                 else
                     dct[p] = {}
                 dct = dct[p]

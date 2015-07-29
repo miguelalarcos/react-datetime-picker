@@ -9,9 +9,9 @@ Example of use:
 A = ReactMeteor.createClass
     mixins: [DTP.changeDataMx]
     getInitialState: ->
-        date: moment()
+        date: new Date()
         date2: 
-            date: moment()
+            date: new Date()
     templateName: 'A'
     render: ->
         <div>
