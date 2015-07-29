@@ -1,6 +1,6 @@
 Package.describe({
   name: 'miguelalarcos:react-datetime-picker',
-  version: '0.1.6',
+  version: '0.1.7',
   // Brief, one-line summary of the package.
   summary: 'A date-time picker for React',
   // URL to the Git repository containing the source code for this package.
@@ -13,7 +13,8 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   //api.use('coffeescript');
-  api.use('reactjs:react@0.2.4');
+  //api.use('reactjs:react@0.2.4');
+  api.use('react');
   api.use('jhartma:cjsx@2.4.1');
   api.use('momentjs:moment@2.10.3');
   api.use('benmgreene:moment-range@1.0.7');

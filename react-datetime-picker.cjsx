@@ -32,24 +32,28 @@ week = -> [0...6]
 day = (week, m) ->
     dayRow(week, m)
 
-Day =  ReactMeteor.createClass
+Day =  React.createClass
+    mixins: []
     click: (e) ->
         this.props.changeData(this.props.data.date)
+        @props.show()
         e.preventDefault()
     render: ->
         <span onClick=this.click className={this.props.data.decoration} >{this.props.data.value}</span>
 
 
-Week = ReactMeteor.createClass
+Week = React.createClass
+    mixins: []
     render: ->
         <div className="xdatetime-week">
             {for x in day(this.props.week, this.props.m)
-                <Day key=x.date data=x changeData=this.props.changeData></Day>
+                <Day show=@props.show key=x.date data=x changeData=this.props.changeData></Day>
             }
         </div>
 
 
-DTP.DateTimePicker = ReactMeteor.createClass
+DTP.DateTimePicker = React.createClass
+    mixins: []
     showCalendar: -> this.setState show: not this.state.show
     getInitialState: ->
         show: false
@@ -111,7 +115,7 @@ DTP.DateTimePicker = ReactMeteor.createClass
                 <span>&nbsp;&nbsp;</span>
                 <i  onClick=this.plusYear className="ion-plus plus-year"></i>
                 </div>
-                {<Week m=this.props.value key=w week=w changeData=this.props.changeData></Week> for w in week()}
+                {<Week show=@showCalendar m=this.props.value key=w week=w changeData=this.props.changeData></Week> for w in week()}
                 {if this.props.time
                     <div className="xdatetime-bottom">
                         <i onClick=this.minusHour className="ion-minus minus-hour"></i>
